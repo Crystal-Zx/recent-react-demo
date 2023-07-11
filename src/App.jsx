@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { useEventEmitter, useWebSocket } from "ahooks"
 import { useWebSocketStore } from "./stores/useWebSocketStore"
 import { useSymbolStore } from "./stores/useSymbolStore"
@@ -6,6 +6,8 @@ import QuotePane from "./components/QuotePane"
 import { enableMapSet } from "immer"
 import { throttle } from "lodash"
 import CounterLabel from "./components/Counter"
+import RaceCondition from "./components/RaceCondiftion"
+import WebSocketDemo from "./components/websocket/WebSocketDemo"
 
 enableMapSet()
 
@@ -18,7 +20,6 @@ const ReadyState = {
 
 function App(props) {
   console.log("==> App render")
-  const [count, setCount] = useState(0)
   // const evtEmitter = useWebSocketStore.use.evtEmitter()
   // const { saveSendMessage } = useWebSocketStore.use.actions()
   // const { initSymbolDataFromArr, updateSymbolQuote } =
@@ -66,7 +67,6 @@ function App(props) {
   //   },
   //   [_sendMessage]
   // )
-
   // useEffect(() => {
   //   // 本组件销毁时主动关闭 websocket 连接
   //   return () => {
@@ -112,19 +112,6 @@ function App(props) {
   //   }
   // }, [readyState])
 
-  const testAsyncUpdate = () => {
-    // console.log(count) // 0
-
-    // setCount(count => count + 1) // 请求使用 1 重新渲染
-    // console.log(count) // 仍然是 0!
-
-    // setTimeout(() => {
-    console.log("==> before", count)
-    setCount(count => count + 1) // 请求使用 1 重新渲染
-    console.log("==> after", count)
-    // }, 2000)
-  }
-
   return (
     <>
       {/* <button
@@ -139,25 +126,6 @@ function App(props) {
       </button>
       <button onClick={() => disconnect && disconnect()}>Disconnect</button> */}
       {/* <QuotePane /> */}
-
-      {/* <button
-        onClick={() => {
-          setCount(count => count + 1)
-        }}
-      >
-        +
-      </button>
-      <span>&nbsp;{count}&nbsp;</span>
-      <button
-        onClick={() => {
-          setCount(count => count - 1)
-        }}
-      >
-        -
-      </button>
-      <CounterLabel count={count} /> */}
-
-      <button onClick={testAsyncUpdate}>click</button>
     </>
   )
 }

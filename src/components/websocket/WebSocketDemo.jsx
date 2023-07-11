@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from "react"
-// import { useWebSocket } from "ahooks"
+import { useWebSocket } from "ahooks"
 // import { useWebSocketActions } from "../../stores/useWebSocketStore"
 
 const ReadyState = {
@@ -11,15 +11,16 @@ const ReadyState = {
 
 export default () => {
   // const websocketActions = useWebSocketActions()
-  // console.log("==> Com", websocketActions)
 
-  // const messageHistory = useRef([])
+  const messageHistory = useRef([])
 
-  // const { readyState, sendMessage, latestMessage, disconnect, connect } =
-  //   useWebSocket(
-  //     // "wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"
-  //     "wss://demotrade.alphazone-data.cn/ws"
-  //   )
+  const { readyState, sendMessage, latestMessage, disconnect, connect } =
+    useWebSocket(
+      // "wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self"
+      "wss://demotrade.alphazone-data.cn/ws"
+    )
+
+  // console.log("==> WebSocketDemo render", latestMessage)
 
   // messageHistory.current = useMemo(
   //   () => messageHistory.current.concat(latestMessage),
@@ -28,10 +29,14 @@ export default () => {
 
   return (
     <div>
-      {/* <button
-        onClick={() =>
-          sendMessage &&
-          sendMessage(JSON.stringify({ cmd: "symbols", args: [""] }))
+      <button
+        onClick={
+          () =>
+            sendMessage &&
+            sendMessage(
+              JSON.stringify({ cmd: "quote", args: ["CADJPY", "USDAUD"] })
+            )
+          // sendMessage(JSON.stringify({ cmd: "symbols", args: [""] }))
         }
         // onClick={() => sendMessage && sendMessage(`${Date.now()}`)}
         disabled={readyState !== ReadyState.Open}
@@ -55,12 +60,13 @@ export default () => {
       <div style={{ marginTop: 8 }}>readyState: {readyState}</div>
       <div style={{ marginTop: 8 }}>
         <p>received message: </p>
-        {messageHistory.current.map((message, index) => (
+        {/* {JSON.stringify(latestMessage.message.data)} */}
+        {/* {messageHistory.current.map((message, index) => (
           <p key={index} style={{ wordWrap: "break-word" }}>
             {message?.data}
           </p>
-        ))}
-      </div> */}
+        ))} */}
+      </div>
     </div>
   )
 }
