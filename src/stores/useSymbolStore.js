@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { createSelector } from "./createSelector"
 import { immer } from "zustand/middleware/immer"
+import { toDecimal } from "../utils/tools"
 
 const useSymbolStoreBase = create(
   immer((set, get) => ({
@@ -15,27 +16,21 @@ const useSymbolStoreBase = create(
         })
       },
       updateSymbolQuote: quoteMap => {
-        console.log("==> update quoteMap", quoteMap)
-        // const data = Object.fromEntries(quoteMap)
-        // data = data.map(item => {
-        //   const res = state.getSymbolInfo(item?.name || item?.symbol)
-        //   const { holc = {} } = res || {}
-        //   item.name = item.symbol
-        //   item.spread =
-        //     holc?.open &&
-        //     toDecimal(((item.bid - holc?.open) * 100) / holc?.open, 2)
-        //   // 处理小数位显示
-        //   const digits = item.digits
-        //   item.bid = toDecimal(item.bid, digits)
-        //   item.ask = toDecimal(item.ask, digits)
-        //   return item
-        // })
-
-        // set(state => {
-        //   for (const [key, item] of quoteMap) {
-        //     state.symbolData[key].quote = item
-        //   }
-        // })
+        console.log("==> update quoteMap", quoteMap.size)
+        set(state => {
+          for (const [key, item] of quoteMap) {
+            const currData = get().symbolData[key]
+            const { holc = {} } = currData || {}
+            item.spread =
+              holc?.open &&
+              toDecimal(((item.bid - holc?.open) * 100) / holc?.open, 2)
+            // 处理小数位显示
+            const digits = item.digits
+            item.bid = toDecimal(item.bid, digits)
+            item.ask = toDecimal(item.ask, digits)
+            state.symbolData[key].quote = item
+          }
+        })
       },
     },
   }))

@@ -1,5 +1,5 @@
 // NOTE: 发布订阅模式来分发处理 socket 数据
-export default class SocketEventEmitter {
+export default class EventEmitter {
   constructor() {
     // eventMap 用来存储事件和监听函数之间的关系
     this.eventMap = {}
@@ -7,7 +7,7 @@ export default class SocketEventEmitter {
   // 负责注册事件的监听器，指定事件触发时的回调函数
   on = (evtName, handler) => {
     if (typeof handler !== "function") {
-      throw new Error("==> SocketEventEmitter error, handler is not a function")
+      throw new Error("==> EventEmitter error, handler is not a function")
     }
     if (!this.eventMap[evtName]) {
       this.eventMap[evtName] = []

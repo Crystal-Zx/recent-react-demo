@@ -1,15 +1,23 @@
-import { useState, useEffect, useCallback, useRef } from "react"
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useLayoutEffect,
+} from "react"
 import { useEventEmitter, useWebSocket } from "ahooks"
 import { useWebSocketStore } from "./stores/useWebSocketStore"
 import { useSymbolStore } from "./stores/useSymbolStore"
-import QuotePane from "./components/QuotePane"
+import QuoteModule from "./components/quote/QuoteModule"
 import { enableMapSet } from "immer"
 import { throttle } from "lodash"
 import CounterLabel from "./components/Counter"
 import RaceCondition from "./components/RaceCondiftion"
 import WebSocketDemo from "./components/websocket/WebSocketDemo"
+import { Button, Spin } from "antd"
+// import { initSocket } from "./components/websocket/Socket1"
 
-enableMapSet()
+// enableMapSet()
 
 const ReadyState = {
   Connecting: 0,
@@ -20,6 +28,16 @@ const ReadyState = {
 
 function App(props) {
   console.log("==> App render")
+  const { initSocket } = useWebSocketStore.use.actions()
+  const [isWebSocketReady, setIsWebSocketReady] = useState(false)
+
+  useEffect(() => {
+    const wsClient = initSocket("wss://demotrade.alphazone-data.cn/ws")
+    wsClient.subscribeOnce("open", () => setIsWebSocketReady(true))
+    return () => {
+      wsClient.closeSocket()
+    }
+  }, [])
   // const evtEmitter = useWebSocketStore.use.evtEmitter()
   // const { saveSendMessage } = useWebSocketStore.use.actions()
   // const { initSymbolDataFromArr, updateSymbolQuote } =
@@ -112,6 +130,8 @@ function App(props) {
   //   }
   // }, [readyState])
 
+  if (!isWebSocketReady) return <Spin size="large" />
+
   return (
     <>
       {/* <button
@@ -125,7 +145,7 @@ function App(props) {
         订阅品种数据
       </button>
       <button onClick={() => disconnect && disconnect()}>Disconnect</button> */}
-      {/* <QuotePane /> */}
+      <QuoteModule />
     </>
   )
 }
