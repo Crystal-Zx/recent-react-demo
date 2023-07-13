@@ -16,7 +16,7 @@ const useSymbolStoreBase = create(
         })
       },
       updateSymbolQuote: quoteMap => {
-        console.log("==> update quoteMap", quoteMap.size)
+        // console.log("==> update quoteMap", quoteMap.size)
         set(state => {
           for (const [key, item] of quoteMap) {
             const currData = get().symbolData[key]

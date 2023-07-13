@@ -12,10 +12,18 @@ const useWebSocketStoreBase = create(
     // sendMessage: () => {},
     actions: {
       initSocket: url => {
-        if (get().wsClient !== null) {
-          console.log("已有 websocket 实例，请勿重复创建")
-          return
+        console.log("==> url", url)
+        const prevWsClient = get().wsClient
+        if (prevWsClient !== null) {
+          const prevUrl = get().wsClient?.websocket?.url
+          if (prevUrl === url) {
+            console.log("已有相同 url 地址的 websocket 实例，请勿重复创建")
+            return
+          }
+          // url 不一致就应该先清除旧的 wsClient 在创建新的
+          prevWsClient.closeSocket()
         }
+        // 创建新的 WebsocketClient 实例
         const wsClient = new WebSocketClient(url)
         set(state => {
           state.wsClient = wsClient

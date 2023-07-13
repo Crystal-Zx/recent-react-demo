@@ -1,12 +1,12 @@
 import { useMemo } from "react"
-import { Collapse, Spin } from "antd"
+import { Collapse, Empty, Spin } from "antd"
 import { useSymbolStore } from "../../stores/useSymbolStore"
 
 const { Panel } = Collapse
 
 function QuoteItem({ name }) {
   const data = useSymbolStore.use.symbolData(data => data[name])
-  console.log("==> QuoteItem render")
+  // console.log("==> QuoteItem render")
 
   return (
     <p>
@@ -17,6 +17,7 @@ function QuoteItem({ name }) {
 
 export default function QuoteTabPane({ groupInfo }) {
   console.log("==> QuoteTabPane render", groupInfo)
+  if (groupInfo === null) return <Spin />
   const items = Object.entries(groupInfo).map(([group, names]) => ({
     key: group,
     label: group,
@@ -24,7 +25,7 @@ export default function QuoteTabPane({ groupInfo }) {
   }))
 
   console.log("==> items", items)
-  if (!Object.keys(groupInfo).length) return <Spin />
+  if (!Object.keys(groupInfo).length) return <Empty />
   return (
     <Collapse
       items={items}

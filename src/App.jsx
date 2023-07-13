@@ -9,15 +9,11 @@ import { useEventEmitter, useWebSocket } from "ahooks"
 import { useWebSocketStore } from "./stores/useWebSocketStore"
 import { useSymbolStore } from "./stores/useSymbolStore"
 import QuoteModule from "./components/quote/QuoteModule"
-import { enableMapSet } from "immer"
 import { throttle } from "lodash"
 import CounterLabel from "./components/Counter"
 import RaceCondition from "./components/RaceCondiftion"
 import WebSocketDemo from "./components/websocket/WebSocketDemo"
 import { Button, Spin } from "antd"
-// import { initSocket } from "./components/websocket/Socket1"
-
-// enableMapSet()
 
 const ReadyState = {
   Connecting: 0,
@@ -25,19 +21,27 @@ const ReadyState = {
   Closing: 2,
   Closed: 3,
 }
+const AccountType = ["demo", "live"]
+const WebSocketUrl = {
+  [AccountType[0]]: "wss://demotrade.alphazone-data.cn/ws",
+  [AccountType[1]]: "wss://livetrade.alphazone-data.cn/ws",
+}
 
 function App(props) {
   console.log("==> App render")
   const { initSocket } = useWebSocketStore.use.actions()
   const [isWebSocketReady, setIsWebSocketReady] = useState(false)
+  const [accountType, setAccountType] = useState(AccountType[0])
 
   useEffect(() => {
-    const wsClient = initSocket("wss://demotrade.alphazone-data.cn/ws")
+    setIsWebSocketReady(false)
+    const websocketUrl = WebSocketUrl[accountType]
+    const wsClient = initSocket(websocketUrl)
     wsClient.subscribeOnce("open", () => setIsWebSocketReady(true))
     return () => {
       wsClient.closeSocket()
     }
-  }, [])
+  }, [accountType])
   // const evtEmitter = useWebSocketStore.use.evtEmitter()
   // const { saveSendMessage } = useWebSocketStore.use.actions()
   // const { initSymbolDataFromArr, updateSymbolQuote } =
@@ -145,6 +149,13 @@ function App(props) {
         订阅品种数据
       </button>
       <button onClick={() => disconnect && disconnect()}>Disconnect</button> */}
+      <Button
+        onClick={() =>
+          setAccountType(at => AccountType[AccountType.indexOf(at) ^ 1])
+        }
+      >
+        切换url
+      </Button>
       <QuoteModule />
     </>
   )

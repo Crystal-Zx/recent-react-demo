@@ -48,14 +48,19 @@ export default class WebSocketClient {
       that.heartbeatCheck()
     }
     that.websocket.onclose = function (e) {
+      that.closeHeartbeatCheck() // 关闭当前的心跳检测
       console.log("[WebSocket Client] WebSocket 连接关闭", e)
-      if (that.isManualClose || that.reconnectCount > that.reconnectLimit) {
-        message.error("服务器已断开")
+      if (that.isManualClose) {
+        // 目前仅切换 url 会触发手动断开连接
+        message.warning("服务器正切换地址重连，请稍等...")
+        return
+      }
+      if (that.reconnectCount > that.reconnectLimit) {
+        message.error("服务器重连失败，请刷新浏览器重试")
         return
       }
       message.warning("服务器断开，正在尝试重连...")
       that.reconnectCount++
-      that.closeHeartbeatCheck() // 关闭当前的心跳检测
       that.initSocket(url)
     }
     that.websocket.onerror = function (e) {

@@ -19,8 +19,8 @@ export default function QuoteModule() {
   const { initSymbolDataFromArr, updateSymbolQuote } =
     useSymbolStore.use.actions()
 
-  const [inlandGroups, setInlandGroups] = useState({})
-  const [intlGroups, setIntlGroups] = useState({})
+  const [inlandGroups, setInlandGroups] = useState(null)
+  const [intlGroups, setIntlGroups] = useState(null)
 
   // const [groupInfo, setGroupInfo] = useState({
   //   inlandGroups: null, // 国内期货
@@ -41,7 +41,7 @@ export default function QuoteModule() {
         updateSymbolQuote(cacheQuoteDataMap)
         cacheQuoteDataMap.clear()
       },
-      3000,
+      17,
       {
         leading: true,
       }
@@ -87,26 +87,23 @@ export default function QuoteModule() {
     }
   }, [])
 
-  const TabsItems = useMemo(
-    () => [
-      {
-        key: 0,
-        label: "自选",
-        children: <QuoteTabPane groupInfo={[]} />,
-      },
-      {
-        key: 1, // NOTE: key 值不要使用 intl 内容，否则会导致无意义的 render
-        label: "国内期货",
-        children: <QuoteTabPane groupInfo={inlandGroups} />,
-      },
-      {
-        key: 2,
-        label: "国际市场",
-        children: <QuoteTabPane groupInfo={intlGroups} />,
-      },
-    ],
-    [inlandGroups, intlGroups]
-  )
+  const TabsItems = [
+    {
+      key: 0,
+      label: "自选",
+      children: <QuoteTabPane groupInfo={[]} />,
+    },
+    {
+      key: 1, // NOTE: key 值不要使用 intl 内容，否则会导致无意义的 render
+      label: "国内期货",
+      children: <QuoteTabPane groupInfo={inlandGroups} />,
+    },
+    {
+      key: 2,
+      label: "国际市场",
+      children: <QuoteTabPane groupInfo={intlGroups} />,
+    },
+  ]
 
-  return <Tabs defaultActiveKey={1} items={TabsItems} />
+  return <Tabs defaultActiveKey={2} items={TabsItems} />
 }
