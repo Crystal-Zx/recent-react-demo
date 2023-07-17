@@ -70,7 +70,7 @@ export default class WebSocketClient {
       // TODO: 根据后续情况决定是否需要再次开启重连
     }
     that.websocket.onmessage = function (e) {
-      // console.log("[WebSocket Client] WebSocket 连接收到新消息")
+      console.log("[WebSocket Client] WebSocket 连接收到新消息")
       try {
         // 收到任意消息都代表当前连接正常，重置心跳检测（关闭 heartbeatOutTimer 超时检测定时器）
         that.resetHeartbeatCheck()

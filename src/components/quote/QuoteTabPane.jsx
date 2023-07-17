@@ -17,7 +17,9 @@ function QuoteItem({ name }) {
 
 export default function QuoteTabPane({ groupInfo }) {
   console.log("==> QuoteTabPane render", groupInfo)
+
   if (groupInfo === null) return <Spin />
+
   const items = Object.entries(groupInfo).map(([group, names]) => ({
     key: group,
     label: group,

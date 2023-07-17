@@ -1810,6 +1810,11 @@
     rc-resize-observer "^1.3.1"
     rc-util "^5.33.0"
 
+"@remix-run/router@1.7.1":
+  version "1.7.1"
+  resolved "https://registry.npmmirror.com/@remix-run/router/-/router-1.7.1.tgz#fea7ac35ae4014637c130011f59428f618730498"
+  integrity sha512-bgVQM4ZJ2u2CM8k1ey70o1ePFXsEzYVZoWghh6WjM8p59jQ7HxzbHW4SbnWFG7V9ig9chLawQxDTZ3xzOF8MkQ==
+
 "@rollup/plugin-babel@^5.2.0":
   version "5.3.1"
   resolved "https://registry.npmmirror.com/@rollup/plugin-babel/-/plugin-babel-5.3.1.tgz#04bc0608f4aa4b2e4b1aebf284344d0f68fda283"
@@ -3276,6 +3281,14 @@ bytes@3.1.2:
   resolved "https://registry.npmmirror.com/bytes/-/bytes-3.1.2.tgz#8b0beeb98605adf1b128fa4386403c009e0221a5"
   integrity sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==
 
+cache2@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmmirror.com/cache2/-/cache2-1.0.3.tgz#65458c3768b9ada7e4863e14caab7072451fdee8"
+  integrity sha512-PBC5wXV/2VLp8PbuDf5SZ5JP77sv1b6hba2/tj9iClCMSa8thR30d0qVOKq3UP3+k606PhbxodhmrvV5Ri+Siw==
+  dependencies:
+    emitter-pro "^1.0.3"
+    tslib "^2.6.0"
+
 call-bind@^1.0.0, call-bind@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmmirror.com/call-bind/-/call-bind-1.0.2.tgz#b1d4e89e688119c3c9a903ad30abb2f6a919be3c"
@@ -3635,6 +3648,11 @@ cosmiconfig@^7.0.0:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+create-puzzle@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmmirror.com/create-puzzle/-/create-puzzle-1.0.3.tgz#e8e7d9133035f0d30629cc2f8326c2c8a29e5507"
+  integrity sha512-nJXqq49NulU/KLqNXiDa3QCx5UFQc1IwN7uO9+WWqbnjBZIpa3rHeXmPgoOSK7tz3jhmNBCDxFEVv5kkEQsfuQ==
 
 cross-spawn@^7.0.2, cross-spawn@^7.0.3:
   version "7.0.3"
@@ -4159,6 +4177,11 @@ electron-to-chromium@^1.4.431:
   version "1.4.450"
   resolved "https://registry.npmmirror.com/electron-to-chromium/-/electron-to-chromium-1.4.450.tgz#df232c961ee9bf4e8980f86e96a6e9f291720138"
   integrity sha512-BLG5HxSELlrMx7dJ2s+8SFlsCtJp37Zpk2VAxyC6CZtbc+9AJeZHfYHbrlSgdXp6saQ8StMqOTEDaBKgA7u1sw==
+
+emitter-pro@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmmirror.com/emitter-pro/-/emitter-pro-1.0.3.tgz#9debb369b8486962a3831346db47ea8d025e9745"
+  integrity sha512-ZDkQvjkUfNR/fg2ugjPfknoNpvlrGT13qx1BJXJWXGM/ERhMc/v3XGcQebQIoE/uRJUtehL4htSbK3h5+Jih/Q==
 
 emittery@^0.10.2:
   version "0.10.2"
@@ -7898,6 +7921,15 @@ rc-field-form@~1.34.0:
     async-validator "^4.1.0"
     rc-util "^5.32.2"
 
+rc-hooks@^3.0.1:
+  version "3.0.3"
+  resolved "https://registry.npmmirror.com/rc-hooks/-/rc-hooks-3.0.3.tgz#f6560df23ea04aa92553bad567eaae4880a545b7"
+  integrity sha512-Q0FrAqUImARedqVPd317E1Wu4DZuPwvyC7mLud6pZYVP8E+P0pXTdNForwLJLG3xuqHYa4EDvaQf9pR91T0Nhw==
+  dependencies:
+    cache2 "^1.0.3"
+    tslib "^2.6.0"
+    ut2 "^1.3.0"
+
 rc-image@~7.0.0-2:
   version "7.0.0-2"
   resolved "https://registry.npmmirror.com/rc-image/-/rc-image-7.0.0-2.tgz#ea54b4d30efb7392534a1d78bea6bac6045064b2"
@@ -8053,6 +8085,15 @@ rc-select@~14.5.0:
     rc-overflow "^1.0.0"
     rc-util "^5.16.1"
     rc-virtual-list "^3.5.2"
+
+rc-slider-captcha@^1.1.10:
+  version "1.1.10"
+  resolved "https://registry.npmmirror.com/rc-slider-captcha/-/rc-slider-captcha-1.1.10.tgz#0c288f40ceac4622548b6a717fe99196a38266e1"
+  integrity sha512-tZgDnct1+0iPN0xmmuGrCs1i/THVEl3Z6h0AJ0Vp6KVfTwm4Jiws6f3AYUepRQDVjahDUVXDLmQ721vufhxB4g==
+  dependencies:
+    classnames "^2.3.2"
+    rc-hooks "^3.0.1"
+    tslib "^2.6.0"
 
 rc-slider@~10.1.0:
   version "10.1.1"
@@ -8248,6 +8289,21 @@ react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmmirror.com/react-refresh/-/react-refresh-0.11.0.tgz#77198b944733f0f1f1a90e791de4541f9f074046"
   integrity sha512-F27qZr8uUqwhWZboondsPx8tnC3Ct3SxZA3V5WyEvujRyyNv0VYPhoBg1gZ8/MV5tubQp76Trw8lTv9hzRBa+A==
+
+react-router-dom@6:
+  version "6.14.1"
+  resolved "https://registry.npmmirror.com/react-router-dom/-/react-router-dom-6.14.1.tgz#0ad7ba7abdf75baa61169d49f096f0494907a36f"
+  integrity sha512-ssF6M5UkQjHK70fgukCJyjlda0Dgono2QGwqGvuk7D+EDGHdacEN3Yke2LTMjkrpHuFwBfDFsEjGVXBDmL+bWw==
+  dependencies:
+    "@remix-run/router" "1.7.1"
+    react-router "6.14.1"
+
+react-router@6.14.1:
+  version "6.14.1"
+  resolved "https://registry.npmmirror.com/react-router/-/react-router-6.14.1.tgz#5e82bcdabf21add859dc04b1859f91066b3a5810"
+  integrity sha512-U4PfgvG55LdvbQjg5Y9QRWyVxIdO1LlpYT7x+tMAxd9/vmiPuJhIwdxZuIQLN/9e3O4KFDHYfR9gzGeYMasW8g==
+  dependencies:
+    "@remix-run/router" "1.7.1"
 
 react-scripts@5.0.1:
   version "5.0.1"
@@ -9372,7 +9428,7 @@ tslib@^1.8.1:
   resolved "https://registry.npmmirror.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3, tslib@^2.4.1:
+tslib@^2.0.3, tslib@^2.4.1, tslib@^2.6.0:
   version "2.6.0"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.6.0.tgz#b295854684dbda164e181d259a22cd779dcd7bc3"
   integrity sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==
@@ -9527,6 +9583,13 @@ use-sync-external-store@1.2.0:
   version "1.2.0"
   resolved "https://registry.npmmirror.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
+
+ut2@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.npmmirror.com/ut2/-/ut2-1.3.0.tgz#0a4f9f3c4f83c0c0cd763b0c4f7ea22f55d23bef"
+  integrity sha512-1JP9qtE4Ii4CWtAHAtuDjZgZSbApVnO2FjR6E9AVrQ/xuuEpHna31QerS0qS0vttuk41KTsc7+yNzuUrzsBw/w==
+  dependencies:
+    tslib "^2.6.0"
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
